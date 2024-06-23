@@ -148,7 +148,10 @@ pub fn elements_test() {
   counter |> counter.elements |> expect.to_equal(["dog"])
 
   let counter = counter |> counter.insert("cat")
-  counter |> counter.elements |> expect.to_equal(["cat", "dog"])
+  counter
+  |> counter.elements
+  |> list.sort(string.compare)
+  |> expect.to_equal(["cat", "dog"])
 
   let counter = counter |> counter.insert("dog")
   let counter = counter |> counter.insert("dog")
