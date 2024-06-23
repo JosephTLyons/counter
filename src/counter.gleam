@@ -1,48 +1,9 @@
-import birl.{now}
-import birl/duration
 import gleam/dict
 import gleam/int
-import gleam/io
-import gleam/iterator
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/pair
 import gleam/result
-
-pub fn main() {
-  let times = 20_000_000
-  let counter_1 = build_big_counter(new(), times)
-  let counter_2 = build_big_counter(new(), times)
-
-  let a = now()
-  // let counter_3 = counter_1 |> add(counter_2)
-  counter_2 |> elements
-  let duration =
-    now() |> birl.difference(a) |> duration.blur_to(duration.MilliSecond)
-  // io.debug(counter_3)
-  io.debug(duration)
-  // io.debug(counter_3 |> total)
-
-  // let a = 10_000_001
-  // 10_000_000
-  // let c =
-  //   iterator.range(0, 10_000_000)
-  //   |> iterator.map(fn(_) { int.random(100) })
-  //   |> iterator.fold(new(), fn(counter, num) { counter |> insert(num) })
-
-  // c |> io.debug
-  // c |> size |> io.debug
-  // c |> total |> io.debug
-}
-
-fn build_big_counter(counter: Counter(Int), n: Int) -> Counter(Int) {
-  let counter = counter |> update([1, 2, 3])
-
-  case n > 0 {
-    True -> build_big_counter(counter, n - 1)
-    False -> counter
-  }
-}
 
 pub opaque type Counter(a) {
   Counter(d: dict.Dict(a, Int))

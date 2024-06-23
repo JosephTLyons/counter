@@ -1,9 +1,7 @@
 import counter
 import gleam/dict
-import gleam/int
 import gleam/list
 import gleam/option.{None, Some}
-import gleam/pair
 import gleam/string
 import gleeunit
 import startest/expect
