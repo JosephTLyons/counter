@@ -95,4 +95,3 @@ pub fn from_dict(d: dict.Dict(a, Int)) -> Counter(a) {
   d |> Counter
 }
 // Look at code and see what all non-required inputs there are
-// Decide if we want to wrap more dict functions or delete them in favor of to_dict and from_dict
