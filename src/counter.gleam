@@ -71,15 +71,11 @@ pub fn total(counter: Counter(a)) -> Int {
   |> result.unwrap(0)
 }
 
-pub fn items(counter: Counter(a)) -> List(#(a, Int)) {
-  counter.d
-  |> dict.to_list
-}
-
 pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
   let counter =
     counter
-    |> items
+    |> to_dict
+    |> dict.to_list
     // This could be made more efficient by not sorting the whole list in the case of n = Some(Int)
     |> list.sort(fn(a, b) { int.compare(b.1, a.1) })
 
