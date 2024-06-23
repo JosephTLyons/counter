@@ -166,9 +166,3 @@ pub fn subtact_test() {
   |> list.sort(string.compare)
   |> expect.to_equal(["mouse"])
 }
-// fn string_lists_are_equal(items_a: List(String), items_b: List(String)) -> Bool {
-//   let a = items_a |> list.sort(string.compare)
-//   let b = items_b |> list.sort(string.compare)
-
-//   a == b
-// }
