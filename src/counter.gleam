@@ -140,10 +140,6 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
   |> Counter
 }
 
-pub fn size(counter: Counter(a)) -> Int {
-  counter.d |> dict.size
-}
-
 pub fn to_dict(counter: Counter(a)) -> dict.Dict(a, Int) {
   counter.d
 }
