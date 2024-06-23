@@ -78,14 +78,12 @@ pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
 
 pub fn values(counter: Counter(a)) -> List(Int) {
   counter.d
-  |> dict.to_list
-  |> list.map(pair.second)
+  |> dict.values
 }
 
 pub fn keys(counter: Counter(a)) -> List(a) {
   counter.d
-  |> dict.to_list
-  |> list.map(pair.first)
+  |> dict.keys
 }
 
 pub fn elements(counter: Counter(a)) -> List(a) {
