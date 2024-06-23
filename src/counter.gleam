@@ -89,17 +89,9 @@ pub fn keys(counter: Counter(a)) -> List(a) {
 pub fn elements(counter: Counter(a)) -> List(a) {
   counter.d
   |> dict.to_list
-  |> do_elements([])
-}
-
-fn do_elements(items: List(#(a, Int)), acc: List(a)) -> List(a) {
-  case items {
-    [] -> acc
-    [first, ..rest] -> {
-      let acc = prepend_repeated_item(first.0, first.1, acc)
-      do_elements(rest, acc)
-    }
-  }
+  |> list.fold([], fn(items, item) {
+    prepend_repeated_item(item.0, item.1, items)
+  })
 }
 
 fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
