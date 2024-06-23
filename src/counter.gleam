@@ -1,7 +1,9 @@
 import birl.{now}
+import birl/duration
 import gleam/dict
 import gleam/int
 import gleam/io
+import gleam/iterator
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/pair
@@ -15,11 +17,22 @@ pub fn main() {
   let a = now()
   // let counter_3 = counter_1 |> add(counter_2)
   counter_2 |> elements
-  let b = now()
-
+  let duration =
+    now() |> birl.difference(a) |> duration.blur_to(duration.MilliSecond)
   // io.debug(counter_3)
-  io.debug(birl.difference(b, a))
+  io.debug(duration)
   // io.debug(counter_3 |> total)
+
+  // let a = 10_000_001
+  // 10_000_000
+  // let c =
+  //   iterator.range(0, 10_000_000)
+  //   |> iterator.map(fn(_) { int.random(100) })
+  //   |> iterator.fold(new(), fn(counter, num) { counter |> insert(num) })
+
+  // c |> io.debug
+  // c |> size |> io.debug
+  // c |> total |> io.debug
 }
 
 fn build_big_counter(counter: Counter(Int), n: Int) -> Counter(Int) {
@@ -94,6 +107,7 @@ pub fn elements(counter: Counter(a)) -> List(a) {
   })
 }
 
+// Can this be turned into some more gleam-like code?
 fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
   case times > 0 {
     True -> prepend_repeated_item(item, times - 1, [item, ..acc])
@@ -125,4 +139,17 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
   |> dict.filter(fn(_, b) { b > 0 })
   |> Counter
 }
+
+pub fn size(counter: Counter(a)) -> Int {
+  counter.d |> dict.size
+}
+
+pub fn to_dict(counter: Counter(a)) -> dict.Dict(a, Int) {
+  counter.d
+}
+
+pub fn from_dict(d: dict.Dict(a, Int)) -> Counter(a) {
+  d |> Counter
+}
 // Look at code and see what all non-required inputs there are
+// Decide if we want to wrap more dict functions or delete them in favor of to_dict and from_dict
