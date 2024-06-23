@@ -110,21 +110,11 @@ fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
 }
 
 pub fn from_list(items: List(a)) -> Counter(a) {
-  do_from_list(items, new())
-}
-
-fn do_from_list(items: List(a), acc: Counter(a)) -> Counter(a) {
-  case items {
-    [] -> acc
-    [first, ..rest] -> {
-      let acc = acc |> insert(first)
-      do_from_list(rest, acc)
-    }
-  }
+  update(new(), items)
 }
 
 pub fn update(counter: Counter(a), items: List(a)) -> Counter(a) {
-  do_from_list(items, counter)
+  items |> list.fold(counter, fn(counter, item) { counter |> insert(item) })
 }
 
 pub fn add(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
