@@ -91,29 +91,22 @@ pub fn keys(counter: Counter(a)) -> List(a) {
 pub fn elements(counter: Counter(a)) -> List(a) {
   counter.d
   |> dict.to_list
-  |> list.map(fn(a) { list.repeat(a.0, a.1) })
-  |> list.flatten
+  |> do_elements([])
 }
 
-pub fn elements_2(counter: Counter(a)) -> List(a) {
-  counter.d
-  |> dict.to_list
-  |> do_elem([])
-}
-
-fn do_elem(items: List(#(a, Int)), acc: List(a)) -> List(a) {
+fn do_elements(items: List(#(a, Int)), acc: List(a)) -> List(a) {
   case items {
     [] -> acc
     [first, ..rest] -> {
-      let acc = do_elements_2(first.0, first.1, acc)
-      do_elem(rest, acc)
+      let acc = prepend_repeated_item(first.0, first.1, acc)
+      do_elements(rest, acc)
     }
   }
 }
 
-fn do_elements_2(item: a, times: Int, acc: List(a)) -> List(a) {
+fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
   case times > 0 {
-    True -> do_elements_2(item, times - 1, [item, ..acc])
+    True -> prepend_repeated_item(item, times - 1, [item, ..acc])
     False -> acc
   }
 }
