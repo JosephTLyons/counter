@@ -110,4 +110,3 @@ pub fn to_dict(counter: Counter(a)) -> dict.Dict(a, Int) {
 pub fn from_dict(d: dict.Dict(a, Int)) -> Counter(a) {
   d |> Counter
 }
-// Look at code and see what all non-required inputs there are
