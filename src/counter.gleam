@@ -13,7 +13,6 @@ pub fn new() -> Counter(a) {
   Counter(d: dict.new())
 }
 
-// TODO: Name?
 pub fn insert(counter: Counter(a), item: a) -> Counter(a) {
   counter.d
   |> dict.update(item, fn(count) { { count |> option.unwrap(0) } + 1 })
