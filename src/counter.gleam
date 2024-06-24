@@ -28,7 +28,7 @@ pub fn total(counter: Counter(a)) -> Int {
   counter.d
   |> dict.to_list
   |> list.map(pair.second)
-  |> list.reduce(fn(a, b) { a + b })
+  |> list.reduce(int.add)
   |> result.unwrap(0)
 }
 
@@ -71,7 +71,7 @@ pub fn update(counter: Counter(a), items: List(a)) -> Counter(a) {
 }
 
 pub fn add(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
-  dict.combine(counter_1.d, counter_2.d, fn(a, b) { a + b }) |> Counter
+  dict.combine(counter_1.d, counter_2.d, int.add) |> Counter
 }
 
 pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
@@ -82,7 +82,7 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
   let diff = dict.drop(dict_2, dict.keys(dict_1))
   let diff_2 = dict.drop(dict_2, dict.keys(diff))
 
-  dict.combine(dict_1, diff_2, fn(a, b) { a - b })
+  dict.combine(dict_1, diff_2, int.subtract)
   |> dict.filter(fn(_, b) { b > 0 })
   |> Counter
 }
