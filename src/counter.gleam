@@ -48,6 +48,11 @@ pub fn values(counter: Counter(a)) -> List(Int) {
   |> dict.values
 }
 
+pub fn keys(counter: Counter(a)) -> List(a) {
+  counter.d
+  |> dict.keys
+}
+
 pub fn elements(counter: Counter(a)) -> List(a) {
   counter.d
   |> dict.to_list
