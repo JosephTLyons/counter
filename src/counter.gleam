@@ -30,11 +30,6 @@ pub fn total(counter: Counter(a)) -> Int {
   |> int.sum
 }
 
-pub fn to_list(counter: Counter(a)) -> List(#(a, Int)) {
-  counter.d
-  |> dict.to_list
-}
-
 pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
   let counter =
     counter
@@ -69,10 +64,6 @@ fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
   }
 }
 
-pub fn from_list(items: List(a)) -> Counter(a) {
-  update(new(), items)
-}
-
 pub fn update(counter: Counter(a), items: List(a)) -> Counter(a) {
   items |> list.fold(counter, fn(counter, item) { counter |> insert(item) })
 }
@@ -96,6 +87,15 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
 
 pub fn size(counter: Counter(a)) -> Int {
   counter.d |> dict.size
+}
+
+pub fn to_list(counter: Counter(a)) -> List(#(a, Int)) {
+  counter.d
+  |> dict.to_list
+}
+
+pub fn from_list(items: List(a)) -> Counter(a) {
+  update(new(), items)
 }
 
 pub fn to_dict(counter: Counter(a)) -> dict.Dict(a, Int) {
