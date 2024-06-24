@@ -48,6 +48,29 @@ pub fn total_test() {
   counter |> counter.total |> expect.to_equal(4)
 }
 
+pub fn items_test() {
+  let counter = counter.new()
+
+  counter |> counter.items |> expect.to_equal([])
+
+  let counter = counter |> counter.insert("dog")
+  counter |> counter.items |> expect.to_equal([#("dog", 1)])
+
+  let counter = counter |> counter.insert("cat")
+  counter
+  |> counter.items
+  |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
+  |> expect.to_equal([#("cat", 1), #("dog", 1)])
+
+  let counter = counter |> counter.insert("dog")
+  let counter = counter |> counter.insert("dog")
+
+  counter
+  |> counter.items
+  |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
+  |> expect.to_equal([#("cat", 1), #("dog", 3)])
+}
+
 pub fn most_common_test() {
   let counter = counter.new()
 
