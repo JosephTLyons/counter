@@ -52,14 +52,14 @@ pub fn total_test() {
 pub fn items_test() {
   let counter = counter.new()
 
-  counter |> counter.items |> expect.to_equal([])
+  counter |> counter.to_list |> expect.to_equal([])
 
   let counter = counter |> counter.insert("dog")
-  counter |> counter.items |> expect.to_equal([#("dog", 1)])
+  counter |> counter.to_list |> expect.to_equal([#("dog", 1)])
 
   let counter = counter |> counter.insert("cat")
   counter
-  |> counter.items
+  |> counter.to_list
   |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
   |> expect.to_equal([#("cat", 1), #("dog", 1)])
 
@@ -67,7 +67,7 @@ pub fn items_test() {
   let counter = counter |> counter.insert("dog")
 
   counter
-  |> counter.items
+  |> counter.to_list
   |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
   |> expect.to_equal([#("cat", 1), #("dog", 3)])
 }
