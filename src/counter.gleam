@@ -27,8 +27,7 @@ pub fn total(counter: Counter(a)) -> Int {
   counter.d
   |> dict.to_list
   |> list.map(pair.second)
-  |> list.reduce(int.add)
-  |> result.unwrap(0)
+  |> int.sum
 }
 
 pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
