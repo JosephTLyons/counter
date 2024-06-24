@@ -103,6 +103,13 @@ pub fn most_common_test() {
   |> expect.to_equal([#("dog", 3), #("cat", 2)])
 }
 
+pub fn values_test() {
+  counter.from_list(["cat", "cat", "dog", "mouse"])
+  |> counter.values
+  |> list.sort(int.compare)
+  |> expect.to_equal([1, 1, 2])
+}
+
 pub fn elements_test() {
   let counter = counter.new()
 
