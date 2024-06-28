@@ -8,9 +8,27 @@ gleam add counter
 ```
 ```gleam
 import counter
+import gleam/io
+import gleam/list
+import gleam/string
 
 pub fn main() {
-  // TODO: An example of the project in use
+  [
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
+    "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
+    "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+    "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+    "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey",
+    "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio",
+    "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
+    "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia",
+    "Washington", "West Virginia", "Wisconsin", "Wyoming",
+  ]
+  |> list.map(fn(state) { state |> string.lowercase |> string.split("") })
+  |> list.flatten
+  |> counter.from_list
+  |> counter.most_common(None)
+  |> io.debug // [#("a", 61), #("i", 44), #("n", 43), ...]
 }
 ```
 
