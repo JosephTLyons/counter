@@ -1,3 +1,4 @@
+import gleam/bool
 import gleam/dict
 import gleam/int
 import gleam/list
@@ -63,10 +64,8 @@ pub fn elements(counter: Counter(a)) -> List(a) {
 
 // Can this be turned into some more gleam-like code, while avoiding list.flatten()?
 fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
-  case times > 0 {
-    True -> prepend_repeated_item(item, times - 1, [item, ..acc])
-    False -> acc
-  }
+  use <- bool.guard(times <= 0, acc)
+  prepend_repeated_item(item, times - 1, [item, ..acc])
 }
 
 pub fn update(counter: Counter(a), items: List(a)) -> Counter(a) {
