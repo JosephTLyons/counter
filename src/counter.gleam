@@ -35,7 +35,7 @@ pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
   let counter =
     counter
     |> to_list
-    // This could be made more efficient by not sorting the whole list in the case of n = Some(Int)
+    // This could probably be made more efficient by not sorting the whole list in the case of n = Some(Int)
     |> list.sort(fn(a, b) { int.compare(b.1, a.1) })
 
   case n {
@@ -62,7 +62,6 @@ pub fn elements(counter: Counter(a)) -> List(a) {
   })
 }
 
-// Can this be turned into some more gleam-like code, while avoiding list.flatten()?
 fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
   use <- bool.guard(times <= 0, acc)
   prepend_repeated_item(item, times - 1, [item, ..acc])
