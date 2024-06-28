@@ -10,6 +10,7 @@ gleam add counter
 import counter
 import gleam/io
 import gleam/list
+import gleam/option.{None}
 import gleam/string
 
 pub fn main() {
