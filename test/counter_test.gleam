@@ -4,11 +4,11 @@ import gleam/list
 import gleam/option.{None, Some}
 import gleam/pair
 import gleam/string
-import gleeunit
+import startest
 import startest/expect
 
 pub fn main() {
-  gleeunit.main()
+  startest.run(startest.default_config())
 }
 
 pub fn insert_test() {
