@@ -28,7 +28,7 @@ pub fn get(counter: Counter(a), item: a) -> Int {
   counter.d |> dict.get(item) |> result.unwrap(0)
 }
 
-/// Returns the total number of items in the `Counter`.
+/// Returns the sum of all counts in the `Counter`.
 pub fn total(counter: Counter(a)) -> Int {
   counter.d
   |> dict.to_list
