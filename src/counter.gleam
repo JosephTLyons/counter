@@ -36,8 +36,8 @@ pub fn total(counter: Counter(a)) -> Int {
   |> int.sum
 }
 
-/// Returns a list containing of item-count tuples, sorted by count in descending order.
-/// If `n` is `None`, the entire list is returned. If `n` is `Some(Int)`, at most `n` items are returned.
+/// Returns a list containing the item-count tuples, sorted by count in descending order.
+/// If `n` is `None`, the entire list is returned. If `n` is `Some`, a list the top `n` most-common items is returned.
 pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
   let counter =
     counter
