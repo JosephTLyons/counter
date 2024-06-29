@@ -53,14 +53,12 @@ pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
 
 /// Returns a list of all the unique items in the `Counter`.
 pub fn keys(counter: Counter(a)) -> List(a) {
-  counter.d
-  |> dict.keys
+  counter.d |> dict.keys
 }
 
 /// Returns a list of all the counts in the `Counter`.
 pub fn values(counter: Counter(a)) -> List(Int) {
-  counter.d
-  |> dict.values
+  counter.d |> dict.values
 }
 
 /// Returns a non-unique list of all the items in the `Counter`. Each item will be repeated in the list the number of times it was inserted into the `Counter`.
@@ -109,8 +107,7 @@ pub fn size(counter: Counter(a)) -> Int {
 
 /// Returns a list of item-count tuples.
 pub fn to_list(counter: Counter(a)) -> List(#(a, Int)) {
-  counter.d
-  |> dict.to_list
+  counter.d |> dict.to_list
 }
 
 /// Creates a `Counter` from a list of items.
