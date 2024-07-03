@@ -11,10 +11,21 @@ import counter
 import gleam/io
 
 pub fn main() {
-  ["dog", "cat", "mouse", "dog", "dog", "cat"]
-  |> counter.from_list
-  |> counter.most_common
-  |> io.debug // [#("dog", 3), #("cat", 2), #("mouse", 1)]
-}
+  let c = ["dog", "cat", "mouse", "dog", "dog", "cat"] |> counter.from_list
 
+  c |> counter.most_common |> io.debug
+  // [#("dog", 3), #("cat", 2), #("mouse", 1)]
+
+  c |> counter.total |> io.debug
+  // 6
+
+  c |> counter.unique_size |> io.debug
+  // 3
+
+  c |> counter.get("horse") |> io.debug
+  // 0
+
+  c |> counter.insert("horse") |> counter.get("horse") |> io.debug
+  // 1
+}
 ```
