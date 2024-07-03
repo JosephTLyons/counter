@@ -1,7 +1,6 @@
 import counter
 import gleam/int
 import gleam/list
-import gleam/option.{None, Some}
 import gleam/pair
 import gleam/string
 import startest
@@ -75,32 +74,32 @@ pub fn items_test() {
 pub fn most_common_test() {
   let counter = counter.new()
 
-  counter |> counter.most_common(None) |> expect.to_equal([])
+  counter |> counter.most_common() |> expect.to_equal([])
 
   let counter = counter |> counter.insert("dog")
-  counter |> counter.most_common(None) |> expect.to_equal([#("dog", 1)])
+  counter |> counter.most_common() |> expect.to_equal([#("dog", 1)])
 
   let counter = counter |> counter.insert("cat")
   counter
-  |> counter.most_common(None)
+  |> counter.most_common()
   |> expect.to_equal([#("cat", 1), #("dog", 1)])
 
   let counter = counter |> counter.insert("dog")
   let counter = counter |> counter.insert("dog")
 
   counter
-  |> counter.most_common(None)
+  |> counter.most_common()
   |> expect.to_equal([#("dog", 3), #("cat", 1)])
 
   let counter = counter |> counter.insert("cat")
   let counter = counter |> counter.insert("mouse")
 
   counter
-  |> counter.most_common(None)
+  |> counter.most_common()
   |> expect.to_equal([#("dog", 3), #("cat", 2), #("mouse", 1)])
 
   counter
-  |> counter.most_common(Some(2))
+  |> counter.most_common_n(2)
   |> expect.to_equal([#("dog", 3), #("cat", 2)])
 }
 

@@ -2,7 +2,7 @@ import gleam/bool
 import gleam/dict
 import gleam/int
 import gleam/list
-import gleam/option.{type Option, None, Some}
+import gleam/option
 import gleam/pair
 import gleam/result
 
@@ -31,17 +31,15 @@ pub fn get(counter: Counter(a), item: a) -> Int {
 /// Returns a list containing the item-count tuples, sorted by count in descending order.
 /// If `n` is `None`, the entire list is returned. If `n` is `Some`, a list the top `n` most-common items is returned.
 /// Returns a list containing all item-count tuples, sorted by count, in descending order.
-pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
-  let counter =
-    counter
-    |> to_list
-    // This could probably be made more efficient by not sorting the whole list in the case of n = Some(Int)
-    |> list.sort(fn(a, b) { int.compare(b.1, a.1) })
+pub fn most_common(counter: Counter(a)) -> List(#(a, Int)) {
+  counter
+  |> to_list
+  |> list.sort(fn(a, b) { int.compare(b.1, a.1) })
+}
 
-  case n {
-    Some(n) -> counter |> list.take(n)
-    None -> counter
-  }
+/// Returns a list of item-count tuples containing the top n most frequent items, sorted by count, in descending order.
+pub fn most_common_n(counter: Counter(a), n: Int) -> List(#(a, Int)) {
+  counter |> most_common() |> list.take(n)
 }
 
 /// Returns a list of all the unique items in the `Counter`.
