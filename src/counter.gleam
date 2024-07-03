@@ -28,14 +28,6 @@ pub fn get(counter: Counter(a), item: a) -> Int {
   counter.d |> dict.get(item) |> result.unwrap(0)
 }
 
-/// Returns the sum of all counts in the `Counter`.
-pub fn total(counter: Counter(a)) -> Int {
-  counter.d
-  |> dict.to_list
-  |> list.map(pair.second)
-  |> int.sum
-}
-
 /// Returns a list containing the item-count tuples, sorted by count in descending order.
 /// If `n` is `None`, the entire list is returned. If `n` is `Some`, a list the top `n` most-common items is returned.
 /// Returns a list containing all item-count tuples, sorted by count, in descending order.
@@ -107,6 +99,14 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
 /// Returns the number of unique items in the `Counter`.
 pub fn size(counter: Counter(a)) -> Int {
   counter.d |> dict.size
+}
+
+/// Returns the sum of all counts in the `Counter`.
+pub fn total(counter: Counter(a)) -> Int {
+  counter.d
+  |> dict.to_list
+  |> list.map(pair.second)
+  |> int.sum
 }
 
 /// Returns a list of item-count tuples.
