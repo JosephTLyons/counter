@@ -38,6 +38,7 @@ pub fn total(counter: Counter(a)) -> Int {
 
 /// Returns a list containing the item-count tuples, sorted by count in descending order.
 /// If `n` is `None`, the entire list is returned. If `n` is `Some`, a list the top `n` most-common items is returned.
+/// Returns a list containing all item-count tuples, sorted by count, in descending order.
 pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
   let counter =
     counter
@@ -52,16 +53,19 @@ pub fn most_common(counter: Counter(a), n: Option(Int)) -> List(#(a, Int)) {
 }
 
 /// Returns a list of all the unique items in the `Counter`.
+/// Do not write code that relies on the order keys are returned by this function as it may change in later versions of Gleam or Erlang.
 pub fn keys(counter: Counter(a)) -> List(a) {
   counter.d |> dict.keys
 }
 
 /// Returns a list of all the counts in the `Counter`.
+/// Do not write code that relies on the order values are returned by this function as it may change in later versions of Gleam or Erlang.
 pub fn values(counter: Counter(a)) -> List(Int) {
   counter.d |> dict.values
 }
 
 /// Returns a non-unique list of all the items in the `Counter`. Each item will be repeated in the list the number of times it was inserted into the `Counter`.
+/// Do not write code that relies on the order elements are returned by this function as it may change in later versions of Gleam or Erlang.
 pub fn elements(counter: Counter(a)) -> List(a) {
   counter.d
   |> dict.to_list
@@ -106,6 +110,7 @@ pub fn size(counter: Counter(a)) -> Int {
 }
 
 /// Returns a list of item-count tuples.
+/// Do not write code that relies on the order tuples are returned by this function as it may change in later versions of Gleam or Erlang.
 pub fn to_list(counter: Counter(a)) -> List(#(a, Int)) {
   counter.d |> dict.to_list
 }
