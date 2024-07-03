@@ -97,7 +97,7 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
 }
 
 /// Returns the number of unique items in the `Counter`.
-pub fn size(counter: Counter(a)) -> Int {
+pub fn unique_size(counter: Counter(a)) -> Int {
   counter.d |> dict.size
 }
 
