@@ -16,16 +16,24 @@ pub fn main() {
   c |> counter.most_common |> io.debug
   // [#("dog", 3), #("cat", 2), #("mouse", 1)]
 
-  c |> counter.total |> io.debug
-  // 6
-
   c |> counter.unique_size |> io.debug
   // 3
+
+  c |> counter.total |> io.debug
+  // 6
 
   c |> counter.get("horse") |> io.debug
   // 0
 
-  c |> counter.insert("horse") |> counter.get("horse") |> io.debug
+  let c = c |> counter.insert("horse")
+
+  c |> counter.get("horse") |> io.debug
   // 1
+
+  c |> counter.keys |> io.debug
+  // ["cat", "dog", "horse", "mouse"]
+
+  c |> counter.elements |> io.debug
+  // ["mouse", "horse", "dog", "dog", "dog", "cat", "cat"]
 }
 ```
