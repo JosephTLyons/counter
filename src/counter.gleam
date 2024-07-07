@@ -87,8 +87,8 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
   let dict_2 = counter_2.d
 
   // TODO: Better names
-  let diff = dict.drop(dict_2, dict.keys(dict_1))
-  let diff_2 = dict.drop(dict_2, dict.keys(diff))
+  let diff = dict_2 |> dict.drop(dict.keys(dict_1))
+  let diff_2 = dict_2 |> dict.drop(dict.keys(diff))
 
   dict.combine(dict_1, diff_2, int.subtract)
   |> dict.filter(fn(_, b) { b > 0 })
