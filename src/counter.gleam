@@ -71,7 +71,8 @@ fn prepend_repeated_item(item: a, times: Int, acc: List(a)) -> List(a) {
 
 /// Updates the `Counter` from a list of items.
 pub fn update(counter: Counter(a), items: List(a)) -> Counter(a) {
-  items |> list.fold(counter, fn(counter, item) { counter |> insert(item) })
+  use counter, item <- list.fold(items, counter)
+  counter |> insert(item)
 }
 
 /// Add the counts from two `Counter`s into a new `Counter`.
