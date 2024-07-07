@@ -89,7 +89,8 @@ pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
   let dict_2_exclusive = dict_2 |> dict.drop(dict.keys(dict_1))
   let dict_2_overlap = dict_2 |> dict.drop(dict.keys(dict_2_exclusive))
 
-  dict.combine(dict_1, dict_2_overlap, int.subtract)
+  dict_1
+  |> dict.combine(dict_2_overlap, int.subtract)
   |> dict.filter(fn(_, b) { b > 0 })
   |> Counter
 }
