@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.3 - 2024-07-07
+
+- Updated documentation.
+
 ## v1.0.2 - 2024-07-03
 
 Breaking changes:
