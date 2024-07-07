@@ -28,8 +28,6 @@ pub fn get(counter: Counter(a), item: a) -> Int {
   counter.d |> dict.get(item) |> result.unwrap(0)
 }
 
-/// Returns a list containing the item-count tuples, sorted by count in descending order.
-/// If `n` is `None`, the entire list is returned. If `n` is `Some`, a list the top `n` most-common items is returned.
 /// Returns a list containing all item-count tuples, sorted by count, in descending order.
 pub fn most_common(counter: Counter(a)) -> List(#(a, Int)) {
   counter
