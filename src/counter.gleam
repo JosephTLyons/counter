@@ -114,7 +114,7 @@ pub fn to_list(counter: Counter(a)) -> List(#(a, Int)) {
 
 /// Creates a `Counter` from a list of items.
 pub fn from_list(items: List(a)) -> Counter(a) {
-  update(new(), items)
+  new() |> update(items)
 }
 
 /// Returns the underlying `gleam/dict` of the `Counter`.
