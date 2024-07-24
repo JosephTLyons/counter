@@ -23,8 +23,7 @@ pub fn insert_test() {
 
   counter |> counter.get(2) |> expect.to_equal(1)
 
-  let counter = counter |> counter.insert(1)
-  let counter = counter |> counter.insert(1)
+  let counter = counter |> counter.insert(1) |> counter.insert(1)
 
   counter |> counter.get(1) |> expect.to_equal(3)
 }
@@ -42,8 +41,7 @@ pub fn total_test() {
 
   counter |> counter.total |> expect.to_equal(2)
 
-  let counter = counter |> counter.insert(1)
-  let counter = counter |> counter.insert(1)
+  let counter = counter |> counter.insert(1) |> counter.insert(1)
 
   counter |> counter.total |> expect.to_equal(4)
 }
@@ -57,13 +55,13 @@ pub fn items_test() {
   counter |> counter.to_list |> expect.to_equal([#("dog", 1)])
 
   let counter = counter |> counter.insert("cat")
+
   counter
   |> counter.to_list
   |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
   |> expect.to_equal([#("cat", 1), #("dog", 1)])
 
-  let counter = counter |> counter.insert("dog")
-  let counter = counter |> counter.insert("dog")
+  let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
   counter
   |> counter.to_list
@@ -84,15 +82,13 @@ pub fn most_common_test() {
   |> counter.most_common()
   |> expect.to_equal([#("cat", 1), #("dog", 1)])
 
-  let counter = counter |> counter.insert("dog")
-  let counter = counter |> counter.insert("dog")
+  let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
   counter
   |> counter.most_common()
   |> expect.to_equal([#("dog", 3), #("cat", 1)])
 
-  let counter = counter |> counter.insert("cat")
-  let counter = counter |> counter.insert("mouse")
+  let counter = counter |> counter.insert("cat") |> counter.insert("mouse")
 
   counter
   |> counter.most_common()
@@ -121,16 +117,14 @@ pub fn keys_test() {
   let counter = counter |> counter.insert("cat")
   counter |> counter.keys |> expect.to_equal(["cat", "dog"])
 
-  let counter = counter |> counter.insert("dog")
-  let counter = counter |> counter.insert("dog")
+  let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
   counter
   |> counter.keys
   |> list.sort(string.compare)
   |> expect.to_equal(["cat", "dog"])
 
-  let counter = counter |> counter.insert("cat")
-  let counter = counter |> counter.insert("mouse")
+  let counter = counter |> counter.insert("cat") |> counter.insert("mouse")
 
   counter
   |> counter.keys
@@ -152,8 +146,7 @@ pub fn elements_test() {
   |> list.sort(string.compare)
   |> expect.to_equal(["cat", "dog"])
 
-  let counter = counter |> counter.insert("dog")
-  let counter = counter |> counter.insert("dog")
+  let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
   counter
   |> counter.elements
