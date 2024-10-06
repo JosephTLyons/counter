@@ -6,7 +6,8 @@ import gleam/option
 import gleam/pair
 import gleam/result
 
-/// A `Counter` is a specialized dictionary used for counting the occurrences of items. `Counter` is implemented using the `gleam/dict` module.
+/// A `Counter` is a specialized dictionary used for counting the occurrences of
+/// items. `Counter` is implemented using the `gleam/dict` module.
 pub opaque type Counter(a) {
   Counter(d: dict.Dict(a, Int))
 }
@@ -28,32 +29,38 @@ pub fn get(counter: Counter(a), item: a) -> Int {
   counter.d |> dict.get(item) |> result.unwrap(0)
 }
 
-/// Returns a list containing all item-count tuples, sorted by count, in descending order.
+/// Returns a list containing all item-count tuples, sorted by count, in
+/// descending order.
 pub fn most_common(counter: Counter(a)) -> List(#(a, Int)) {
   counter
   |> to_list
   |> list.sort(fn(a, b) { int.compare(b.1, a.1) })
 }
 
-/// Returns a list of item-count tuples containing the top n most frequent items, sorted by count, in descending order.
+/// Returns a list of item-count tuples containing the top n most frequent
+/// items, sorted by count, in descending order.
 pub fn most_common_n(counter: Counter(a), n: Int) -> List(#(a, Int)) {
   counter |> most_common() |> list.take(n)
 }
 
-/// Returns a list of all the unique items in the `Counter`.
-/// Do not write code that relies on the order keys are returned by this function as it may change in later versions of Gleam or Erlang.
+/// Returns a list of all the unique items in the `Counter`. Do not write code
+/// that relies on the order keys are returned by this function as it may change
+/// in later versions of Gleam or Erlang.
 pub fn keys(counter: Counter(a)) -> List(a) {
   counter.d |> dict.keys
 }
 
-/// Returns a list of all the counts in the `Counter`.
-/// Do not write code that relies on the order values are returned by this function as it may change in later versions of Gleam or Erlang.
+/// Returns a list of all the counts in the `Counter`. Do not write code that
+/// relies on the order values are returned by this function as it may change in
+/// later versions of Gleam or Erlang.
 pub fn values(counter: Counter(a)) -> List(Int) {
   counter.d |> dict.values
 }
 
-/// Returns a non-unique list of all the items in the `Counter`. Each item will be repeated in the list the number of times it was inserted into the `Counter`.
-/// Do not write code that relies on the order elements are returned by this function as it may change in later versions of Gleam or Erlang.
+/// Returns a non-unique list of all the items in the `Counter`. Each item will
+/// be repeated in the list the number of times it was inserted into the
+/// `Counter`. Do not write code that relies on the order elements are returned
+/// by this function as it may change in later versions of Gleam or Erlang.
 pub fn elements(counter: Counter(a)) -> List(a) {
   counter.d
   |> dict.to_list
@@ -78,8 +85,11 @@ pub fn add(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
   dict.combine(counter_1.d, counter_2.d, int.add) |> Counter
 }
 
-/// Subtracts the counts in the second `Counter` from the first `Counter`, returning a new `Counter` with the results.
-/// Only items present in both `Counter`s will be used when subtracting counts from the first `Counter` and any item with a count of zero or less will be omitted from the new `Counter`.
+/// Subtracts the counts in the second `Counter` from the first `Counter`,
+/// returning a new `Counter` with the results. Only items present in both
+/// `Counter`s will be used when subtracting counts from the first `Counter` and
+/// any item with a count of zero or less will be omitted from the new
+/// `Counter`.
 pub fn subtract(counter_1: Counter(a), counter_2: Counter(a)) -> Counter(a) {
   let dict_1 = counter_1.d
   let dict_2 = counter_2.d
@@ -106,8 +116,9 @@ pub fn total(counter: Counter(a)) -> Int {
   |> int.sum
 }
 
-/// Returns a list of item-count tuples.
-/// Do not write code that relies on the order tuples are returned by this function as it may change in later versions of Gleam or Erlang.
+/// Returns a list of item-count tuples. Do not write code that relies on the
+/// order tuples are returned by this function as it may change in later
+/// versions of Gleam or Erlang.
 pub fn to_list(counter: Counter(a)) -> List(#(a, Int)) {
   counter.d |> dict.to_list
 }
