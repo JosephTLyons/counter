@@ -13,19 +13,19 @@ pub fn main() {
 pub fn insert_test() {
   let counter = counter.new()
 
-  counter |> counter.get(1) |> expect.to_equal(0)
+  counter |> counter.get("a") |> expect.to_equal(0)
 
-  let counter = counter |> counter.insert(1)
+  let counter = counter |> counter.insert("a")
 
-  counter |> counter.get(1) |> expect.to_equal(1)
+  counter |> counter.get("a") |> expect.to_equal(1)
 
-  let counter = counter |> counter.insert(2)
+  let counter = counter |> counter.insert("b")
 
-  counter |> counter.get(2) |> expect.to_equal(1)
+  counter |> counter.get("b") |> expect.to_equal(1)
 
-  let counter = counter |> counter.insert(1) |> counter.insert(1)
+  let counter = counter |> counter.insert("b") |> counter.insert("b")
 
-  counter |> counter.get(1) |> expect.to_equal(3)
+  counter |> counter.get("b") |> expect.to_equal(3)
 }
 
 pub fn total_test() {
@@ -33,15 +33,15 @@ pub fn total_test() {
 
   counter |> counter.total |> expect.to_equal(0)
 
-  let counter = counter |> counter.insert(1)
+  let counter = counter |> counter.insert("a")
 
   counter |> counter.total |> expect.to_equal(1)
 
-  let counter = counter |> counter.insert(2)
+  let counter = counter |> counter.insert("b")
 
   counter |> counter.total |> expect.to_equal(2)
 
-  let counter = counter |> counter.insert(1) |> counter.insert(1)
+  let counter = counter |> counter.insert("a") |> counter.insert("a")
 
   counter |> counter.total |> expect.to_equal(4)
 }
