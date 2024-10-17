@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.4 - 2024-07-07
+
+- Removed unused dev-dependencies `gleeunit`.
+
 ## v1.0.3 - 2024-07-07
 
 - Updated documentation.
