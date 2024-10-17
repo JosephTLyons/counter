@@ -20,7 +20,7 @@ pub fn new() -> Counter(a) {
 /// Inserts an item into the `Counter`.
 pub fn insert(counter: Counter(a), item: a) -> Counter(a) {
   counter.d
-  |> dict.update(item, fn(count) { { count |> option.unwrap(0) } + 1 })
+  |> dict.upsert(item, fn(count) { { count |> option.unwrap(0) } + 1 })
   |> Counter
 }
 
