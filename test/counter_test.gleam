@@ -3,180 +3,172 @@ import gleam/int
 import gleam/list
 import gleam/pair
 import gleam/string
-import startest
-import startest/expect
+import gleeunit
 
 pub fn main() {
-  startest.run(startest.default_config())
+  gleeunit.main()
 }
 
 pub fn insert_test() {
   let counter = counter.new()
 
-  counter |> counter.get("a") |> expect.to_equal(0)
+  assert counter.get(counter, "a") == 0
 
   let counter = counter |> counter.insert("a")
 
-  counter |> counter.get("a") |> expect.to_equal(1)
+  assert counter.get(counter, "a") == 1
 
   let counter = counter |> counter.insert("b")
 
-  counter |> counter.get("b") |> expect.to_equal(1)
+  assert counter.get(counter, "b") == 1
 
   let counter = counter |> counter.insert("b") |> counter.insert("b")
 
-  counter |> counter.get("b") |> expect.to_equal(3)
+  assert counter.get(counter, "b") == 3
 }
 
 pub fn total_test() {
   let counter = counter.new()
 
-  counter |> counter.total |> expect.to_equal(0)
+  assert counter.total(counter) == 0
 
   let counter = counter |> counter.insert("a")
 
-  counter |> counter.total |> expect.to_equal(1)
+  assert counter.total(counter) == 1
 
   let counter = counter |> counter.insert("b")
 
-  counter |> counter.total |> expect.to_equal(2)
+  assert counter.total(counter) == 2
 
   let counter = counter |> counter.insert("a") |> counter.insert("a")
 
-  counter |> counter.total |> expect.to_equal(4)
+  assert counter.total(counter) == 4
 }
 
 pub fn items_test() {
   let counter = counter.new()
 
-  counter |> counter.to_list |> expect.to_equal([])
+  assert counter.to_list(counter) == []
 
   let counter = counter |> counter.insert("dog")
-  counter |> counter.to_list |> expect.to_equal([#("dog", 1)])
+  assert counter.to_list(counter) == [#("dog", 1)]
 
   let counter = counter |> counter.insert("cat")
 
-  counter
-  |> counter.to_list
-  |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
-  |> expect.to_equal([#("cat", 1), #("dog", 1)])
+  assert counter
+    |> counter.to_list
+    |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
+    == [#("cat", 1), #("dog", 1)]
 
   let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
-  counter
-  |> counter.to_list
-  |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
-  |> expect.to_equal([#("cat", 1), #("dog", 3)])
+  assert counter
+    |> counter.to_list
+    |> list.sort(fn(a, b) { string.compare(pair.first(a), pair.first(b)) })
+    == [#("cat", 1), #("dog", 3)]
 }
 
 pub fn most_common_test() {
   let counter = counter.new()
 
-  counter |> counter.most_common() |> expect.to_equal([])
+  assert counter.most_common(counter) == []
 
   let counter = counter |> counter.insert("dog")
-  counter |> counter.most_common() |> expect.to_equal([#("dog", 1)])
+  assert counter.most_common(counter) == [#("dog", 1)]
 
   let counter = counter |> counter.insert("cat")
-  counter
-  |> counter.most_common()
-  |> expect.to_equal([#("cat", 1), #("dog", 1)])
+  assert counter.most_common(counter) == [#("cat", 1), #("dog", 1)]
 
   let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
-  counter
-  |> counter.most_common()
-  |> expect.to_equal([#("dog", 3), #("cat", 1)])
+  assert counter.most_common(counter) == [#("dog", 3), #("cat", 1)]
 
   let counter = counter |> counter.insert("cat") |> counter.insert("mouse")
 
-  counter
-  |> counter.most_common()
-  |> expect.to_equal([#("dog", 3), #("cat", 2), #("mouse", 1)])
+  assert counter.most_common(counter)
+    == [#("dog", 3), #("cat", 2), #("mouse", 1)]
 
-  counter
-  |> counter.most_common_n(2)
-  |> expect.to_equal([#("dog", 3), #("cat", 2)])
+  assert counter.most_common_n(counter, 2) == [#("dog", 3), #("cat", 2)]
 }
 
 pub fn values_test() {
-  counter.from_list(["cat", "cat", "dog", "mouse"])
-  |> counter.values
-  |> list.sort(int.compare)
-  |> expect.to_equal([1, 1, 2])
+  assert counter.from_list(["cat", "cat", "dog", "mouse"])
+    |> counter.values
+    |> list.sort(int.compare)
+    == [1, 1, 2]
 }
 
 pub fn keys_test() {
   let counter = counter.new()
 
-  counter |> counter.keys |> expect.to_equal([])
+  assert counter.keys(counter) == []
 
   let counter = counter |> counter.insert("dog")
-  counter |> counter.keys |> expect.to_equal(["dog"])
+  assert counter.keys(counter) == ["dog"]
 
   let counter = counter |> counter.insert("cat")
-  counter |> counter.keys |> expect.to_equal(["cat", "dog"])
+  assert counter.keys(counter) == ["cat", "dog"]
 
   let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
-  counter
-  |> counter.keys
-  |> list.sort(string.compare)
-  |> expect.to_equal(["cat", "dog"])
+  assert counter
+    |> counter.keys
+    |> list.sort(string.compare)
+    == ["cat", "dog"]
 
   let counter = counter |> counter.insert("cat") |> counter.insert("mouse")
 
-  counter
-  |> counter.keys
-  |> list.sort(string.compare)
-  |> expect.to_equal(["cat", "dog", "mouse"])
+  assert counter
+    |> counter.keys
+    |> list.sort(string.compare)
+    == ["cat", "dog", "mouse"]
 }
 
 pub fn elements_test() {
   let counter = counter.new()
 
-  counter |> counter.elements |> expect.to_equal([])
+  assert counter.elements(counter) == []
 
   let counter = counter |> counter.insert("dog")
-  counter |> counter.elements |> expect.to_equal(["dog"])
+  assert counter.elements(counter) == ["dog"]
 
   let counter = counter |> counter.insert("cat")
-  counter
-  |> counter.elements
-  |> list.sort(string.compare)
-  |> expect.to_equal(["cat", "dog"])
+  assert counter
+    |> counter.elements
+    |> list.sort(string.compare)
+    == ["cat", "dog"]
 
   let counter = counter |> counter.insert("dog") |> counter.insert("dog")
 
-  counter
-  |> counter.elements
-  |> list.sort(string.compare)
-  |> expect.to_equal(["cat", "dog", "dog", "dog"])
+  assert counter
+    |> counter.elements
+    |> list.sort(string.compare)
+    == ["cat", "dog", "dog", "dog"]
 }
 
 pub fn from_list_test() {
-  counter.from_list([]) |> counter.keys |> expect.to_equal([])
+  assert counter.keys(counter.from_list([])) == []
 
   let items = ["dog"]
 
-  counter.from_list(items) |> counter.keys |> expect.to_equal(items)
+  assert counter.keys(counter.from_list(items)) == items
 
   let items = ["cat", "dog", "mouse"]
 
-  counter.from_list(items)
-  |> counter.keys
-  |> list.sort(string.compare)
-  |> expect.to_equal(items)
+  assert counter.from_list(items)
+    |> counter.keys
+    |> list.sort(string.compare)
+    == items
 }
 
 pub fn update_from_counter_test() {
   let counter = counter.from_list(["dog", "cat", "mouse"])
   let counter = counter |> counter.update(["bird", "duck", "hourse"])
 
-  counter
-  |> counter.keys
-  |> list.sort(string.compare)
-  |> expect.to_equal(["bird", "cat", "dog", "duck", "hourse", "mouse"])
+  assert counter
+    |> counter.keys
+    |> list.sort(string.compare)
+    == ["bird", "cat", "dog", "duck", "hourse", "mouse"]
 }
 
 pub fn add_test() {
@@ -184,10 +176,10 @@ pub fn add_test() {
   let counter_2 = counter.from_list(["dog", "moose", "bear"])
   let counter = counter_1 |> counter.add(counter_2)
 
-  counter
-  |> counter.elements
-  |> list.sort(string.compare)
-  |> expect.to_equal(["bear", "cat", "dog", "dog", "moose", "mouse"])
+  assert counter
+    |> counter.elements
+    |> list.sort(string.compare)
+    == ["bear", "cat", "dog", "dog", "moose", "mouse"]
 }
 
 pub fn subtact_test() {
@@ -195,17 +187,17 @@ pub fn subtact_test() {
   let counter_2 = counter.from_list(["dog", "cat", "bear"])
   let counter = counter_1 |> counter.subtract(counter_2)
 
-  counter
-  |> counter.elements
-  |> list.sort(string.compare)
-  |> expect.to_equal(["mouse"])
+  assert counter
+    |> counter.elements
+    |> list.sort(string.compare)
+    == ["mouse"]
 
   let counter_1 = counter.from_list(["dog", "cat", "mouse"])
   let counter_2 = counter.from_list(["dog", "dog", "cat"])
   let counter = counter_1 |> counter.subtract(counter_2)
 
-  counter
-  |> counter.elements
-  |> list.sort(string.compare)
-  |> expect.to_equal(["mouse"])
+  assert counter
+    |> counter.elements
+    |> list.sort(string.compare)
+    == ["mouse"]
 }
